@@ -76,21 +76,24 @@ int q1(char c){
     int x = c;
     if (!isupper(x)) return 1;
     /* if it's a hyphen, then go to state 6*/
-    elseif ( c == '-') return 6; 
+    else if ( c == '-') return 6; 
     /* if it's .!? then go to state 3*/
-    elseif ( c == '.' || c == '!' || c == '?') return 3; 
+    else if ( c == '.' || c == '!' || c == '?') return 3; 
     /* if it's a space, then go to state 2*/
-    elseif ( c == ' ') return 2;
+    else if ( c == ' ') return 2;
     /* if it's an apostrophe, then go to state 9*/
-    elseif (c == ''') return 9;
+    else if (c == ''') return 9;
     /* if it's a :;, then go to state 4*/
-    elseif (c == ',' || c == ':' || c == ';') return 4;
+    else if (c == ',' || c == ':' || c == ';') return 4;
     else return -1;
 }
 
 int q2 (char c) {
+    int x = c;
     /* number, 8*/
     if (ch >= '0' && ch <= '9') return 8;
+    /* lowercase or capital, 1*/
+    else if ((ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z')) return 1;
     else return -1;
 }
 
@@ -111,7 +114,7 @@ int q5 (char c){
     /* capital, 1*/
     int x = c;
     if (c == ' ') return 0;
-    elseif (isupper(x)) return 1;
+    else if (isupper(x)) return 1;
     else return -1;
 }
 
@@ -123,10 +126,34 @@ int q6 (char c){
 }
 
 int q7 (char c){
+    int x = c;
     /* lowercase, 1*/
     /* number, 8*/
     if (!isupper(x)) return 1;
-    elseif (ch >= '0' && ch <= '9') return 8;
+    else if (ch >= '0' && ch <= '9') return 8;
+    else return -1;
+}
+
+int q8 (char c){
+    /* number, 8*/
+    if (ch >= '0' && ch <= '9') return 8;
+    /* space, 2*/
+    else if (ch == ' ') return 2;
+     /* ;:,, 4*/
+    else if (c == ',' || c == ':' || c == ';') return 4;
+     /* .!?, 3*/
+    else if (c == '.' || c == '!' || c == '?') return 3;
+    else return -1;
+}
+
+int q9 (char c){
+    int x = c;
+    /* lowercase, 1*/
+    if (!isupper(x)) return 1;
+    /* space, 2*/
+    else if (c == 'c') return 2;
+    /* .!? , 3*/
+    else if (c == '.' || c == '?' || c == '!') return 3;
     else return -1;
 }
 
