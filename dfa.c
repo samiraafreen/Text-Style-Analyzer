@@ -22,34 +22,36 @@ int main(int argc, char* argv []) {
             switch (state)
             {
                 case 0:
+                /* this is the start state */
                     state = q0(c);
                     break;
                 case 1:
                     state = q1(c);
                     break;
-                case 2:
-                    state = q0(c);
+                case 2: 
+                    state = q2(c);
                     break;
                 case 3:
-                    state = q0(c);
+                /* this is the final state */
+                    state = q3(c);
                     break;
                 case 4:
-                    state = q0(c);
+                    state = q4(c);
                     break;
                 case 5:
-                    state = q0(c);
+                    state = q5(c);
                     break;
                 case 6:
-                    state = q0(c);
+                    state = q6(c);
                     break;
                 case 7:
-                    state = q0(c);
+                    state = q7(c);
                     break;
                 case 8:
-                    state = q0(c);
+                    state = q8(c);
                     break;
                 case 9:
-                    state = q0(c);
+                    state = q9(c);
                     break;
                 default:
                     break;
@@ -89,7 +91,6 @@ int q1(char c){
 }
 
 int q2 (char c) {
-    int x = c;
     /* number, 8*/
     if (ch >= '0' && ch <= '9') return 8;
     /* lowercase or capital, 1*/
