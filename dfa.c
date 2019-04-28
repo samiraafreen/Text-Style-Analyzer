@@ -15,7 +15,7 @@ int q0(char c){
 int q1(char c){
     /* if it's lowercase, then loop back to state 2*/
     int x = c;
-    if (!isupper(x)) return 1;
+    if (islower(x)) return 1;
     /* if it's a hyphen, then go to state 6*/
     else if ( c == '-') return 6; 
     /* if it's .!? then go to state 3*/
@@ -59,17 +59,15 @@ int q5 (char c){
 }
 
 int q6 (char c){
-    /* capital, 1*/
-    int x = c;
-    if (!isupper(x)) return 1;
+    /* lowercase or capital, 1*/
+    if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')) return 1;
     else return -1;
 }
 
 int q7 (char c){
-    int x = c;
-    /* lowercase, 1*/
+    /* lowercase or capital, 1*/
     /* number, 8*/
-    if (!isupper(x)) return 1;
+    if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')) return 1;
     else if (c >= '0' && c <= '9') return 8;
     else return -1;
 }
@@ -87,9 +85,8 @@ int q8 (char c){
 }
 
 int q9 (char c){
-    int x = c;
-    /* lowercase, 1*/
-    if (!isupper(x)) return 1;
+    /* lowercase or capital, 1*/
+    if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')) return 1;
     /* space, 2*/
     else if (c == 'c') return 2;
     /* .!? , 3*/
@@ -117,7 +114,9 @@ int main(int argc, char* argv []) {
                 if(state == 3){
                     printf("Correct\n");
                 }
-                printf("Incorrect\n");
+                else{
+                    printf("Incorrect\n");
+                }
                 state = 0;
                 printf("\n> ");
                 continue;
@@ -165,5 +164,6 @@ int main(int argc, char* argv []) {
 }
 //can capitals come after hyphens? like Ray-Bans
 //why only one apostrophe allowed per word? y'all'dn't've
-
+//how many spaces allowed after a line?
+//only double spaces after sentence?
 
