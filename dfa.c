@@ -95,36 +95,50 @@ int q9 (char c){
 }
 
 int main(int argc, char* argv []) {
+    /* exits program if file name is not given */
     if(argc != 2){
         printf("No input given \n");
         exit(1);
     }
+    /* stores state */
     int state = 0;
     int c;
     FILE *file;
+    /* opens file */
     file = fopen(argv[1], "r");
     if (file) {
         printf("> ");
+        /* reads file one char at a time, as long as there are chars left */
         while ((c = getc(file)) != EOF){
             printf("%c", c);
+            /* reject state loop until end of input */
             if(state == -1 && c != '\n'){
                 continue;
             }
+            /* evaluate correctness at the end of each line */
             if(c == '\n'){
+                /* accepting state */
                 if(state == 3){
                     printf("Correct\n");
                 }
+                /* accepting state, has extra spaces at end of line */
+                else if(state == 5 || state == 0){
+                    printf("Correct\n");
+                }
+                /* if at any other state, reject line */
                 else{
                     printf("Incorrect\n");
                 }
+                /* reset DFA */
                 state = 0;
                 printf("\n> ");
                 continue;
             }
             switch (state)
             {
+                /* calculate next state based on current char input */
                 case 0:
-                /* this is the start state */
+                /* this is the start state and accepting state */
                     state = q0(c);
                     break;
                 case 1:
@@ -134,13 +148,14 @@ int main(int argc, char* argv []) {
                     state = q2(c);
                     break;
                 case 3:
-                /* this is the final state */
+                /* accepting state */
                     state = q3(c);
                     break;
                 case 4:
                     state = q4(c);
                     break;
                 case 5:
+                /* accepting state */
                     state = q5(c);
                     break;
                 case 6:
@@ -162,8 +177,3 @@ int main(int argc, char* argv []) {
         fclose(file);
     }
 }
-//can capitals come after hyphens? like Ray-Bans
-//why only one apostrophe allowed per word? y'all'dn't've
-//how many spaces allowed after a line?
-//only double spaces after sentence?
-
